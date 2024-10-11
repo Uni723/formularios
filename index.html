@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="shortcut icon" type="image/png" href="Logo.jpg">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="TelaLogin.css">
+    <title>Login</title>
+    <style>
+ 
+
+        .user-table {
+            display: none;
+            margin-top: 20px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            text-align: left;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+
+        th {
+            background-color: #ffd800;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login-container">
+        <h1>Login</h1>
+        <form id="loginForm">
+            <input type="text" id="Nome" placeholder="Nome" required><br>
+            <input type="email" id="Email" placeholder="Email" required><br>
+            <button type="submit" id="Login">Login</button>
+        </form>
+        
+    </div>
+
+    <div class="user-table">
+        <h2>Registro dos usuários</h2>
+        <table id="userTable">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Email</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        const users = [];
+
+        document.getElementById('loginForm').onsubmit = function(event) {
+            event.preventDefault();
+
+            const nome = document.getElementById('Nome').value;
+            const email = document.getElementById('Email').value;
+
+           
+            users.push({ nome, email });
+
+          
+            document.getElementById('Nome').value = '';
+            document.getElementById('Email').value = '';
+
+            
+            const userTableBody = document.getElementById('userTable').getElementsByTagName('tbody')[0];
+            userTableBody.innerHTML = '';
+
+            for (let i = 0; i < users.length; i++) {
+                const row = userTableBody.insertRow();
+                row.insertCell(0).textContent = users[i].nome;
+                row.insertCell(1).textContent = users[i].email;
+            }
+
+            
+            document.querySelector('.user-table').style.display = 'block';
+        };
+    </script>
+
+</body>
+
+</html>
